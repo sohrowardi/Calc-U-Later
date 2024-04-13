@@ -6,20 +6,10 @@ import random
 current_expression = ""
 
 def calculate_wrong_result():
-    # Get the correct result from the expression
-    try:
-        result = eval(current_expression)
-    except ZeroDivisionError:
-        result = "Error: Division by zero"
-    
-    # Add or subtract a random small value to introduce randomness
-    random_offset = random.uniform(-0.1, 0.1) * abs(result)
-    
-    # Calculate the wrong result
-    wrong_result = round(float(result) + random_offset, 2)
-    
-    # Update the result label
-    result_label.config(text="Result: " + str(wrong_result))
+    global current_expression
+    # Generate a random wrong result
+    result = random.randint(1, 1000)  # Adjust the range as needed
+    result_label.config(text="Result: " + str(result))
 
 def add_to_expression(value):
     global current_expression
@@ -58,9 +48,12 @@ row = 1
 col = 0
 for button in buttons:
     if button == '=':
-        ttk.Button(button_frame, text=button, style='TButton', width=5, command=calculate_expression).grid(row=row, column=col, padx=3, pady=3)
+        btn = ttk.Button(button_frame, text=button, style='TButton', width=5, command=calculate_expression)
     else:
-        ttk.Button(button_frame, text=button, style='TButton', width=5, command=lambda btn=button: add_to_expression(btn)).grid(row=row, column=col, padx=3, pady=3)
+        btn = ttk.Button(button_frame, text=button, style='TButton', width=5, command=lambda btn=button: add_to_expression(btn))
+    btn.grid(row=row, column=col, padx=3, pady=3)
+    # Bind keyboard events to the buttons
+    root.bind(button, lambda event, btn=btn: btn.invoke())
     col += 1
     if col > 3:
         col = 0
