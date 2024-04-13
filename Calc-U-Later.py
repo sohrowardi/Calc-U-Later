@@ -67,11 +67,11 @@ root.bind('<Return>', lambda event: calculate_expression())
 
 # Label to display the result
 result_label = tk.Label(root, text="Result: ", font=('Arial', 14))
-result_label.pack(pady=(0,5))
+result_label.pack(pady=(0, 2))  # Reduced bottom padding
 
 # Label to display the current expression
 expression_label = tk.Label(root, text="Expression: ", font=('Arial', 12))
-expression_label.pack()
+expression_label.pack(pady=(0, 2))  # Reduced bottom padding
 
 # Run the GUI
 root.mainloop()
