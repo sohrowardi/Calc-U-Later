@@ -25,15 +25,18 @@ def calculate_expression():
 
 # Create the main window
 root = tk.Tk()
-root.title("Awesome Wrong Calculator")
+root.title("Calc U Later")
+root.geometry("340x440")
+root.resizable(False, False)  # Disable resizing
 
 # Create a style for the buttons
 style = ttk.Style()
-style.configure('TButton', font=('Arial', 10), padding=5)
+style.configure('TButton', font=('Arial', 12), padding=10)
+style.map('TButton', foreground=[('pressed', 'black'), ('active', 'blue')], background=[('pressed', '!disabled', 'gray'), ('active', 'lightgray')])
 
 # Create a frame for the calculator buttons
-button_frame = tk.Frame(root)
-button_frame.pack()
+button_frame = tk.Frame(root, bg="white")
+button_frame.pack(pady=10)
 
 # Create buttons for numbers and operations
 buttons = [
@@ -44,14 +47,14 @@ buttons = [
 ]
 
 # Layout the buttons in a grid
-row = 1
+row = 0
 col = 0
 for button in buttons:
     if button == '=':
         btn = ttk.Button(button_frame, text=button, style='TButton', width=5, command=calculate_expression)
     else:
         btn = ttk.Button(button_frame, text=button, style='TButton', width=5, command=lambda btn=button: add_to_expression(btn))
-    btn.grid(row=row, column=col, padx=3, pady=3)
+    btn.grid(row=row, column=col, padx=5, pady=5, sticky="nsew")
     # Bind keyboard events to the buttons
     root.bind(button, lambda event, btn=btn: btn.invoke())
     col += 1
@@ -63,11 +66,11 @@ for button in buttons:
 root.bind('<Return>', lambda event: calculate_expression())
 
 # Label to display the result
-result_label = tk.Label(root, text="Result: ", font=('Arial', 12))
-result_label.pack()
+result_label = tk.Label(root, text="Result: ", font=('Arial', 14))
+result_label.pack(pady=(0,5))
 
 # Label to display the current expression
-expression_label = tk.Label(root, text="Expression: ", font=('Arial', 10))
+expression_label = tk.Label(root, text="Expression: ", font=('Arial', 12))
 expression_label.pack()
 
 # Run the GUI
