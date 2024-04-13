@@ -1,0 +1,1 @@
+A fun graphical calculator that gives intentionally incorrect answers. Enjoy the unexpected results!

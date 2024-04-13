@@ -59,6 +59,9 @@ for button in buttons:
         col = 0
         row += 1
 
+# Bind Enter key to "=" button's command
+root.bind('<Return>', lambda event: calculate_expression())
+
 # Label to display the result
 result_label = tk.Label(root, text="Result: ", font=('Arial', 12))
 result_label.pack()
